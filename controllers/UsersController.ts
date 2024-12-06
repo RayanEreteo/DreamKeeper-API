@@ -77,13 +77,13 @@ export async function loginUser(req: Request, res: Response): Promise<any> {
     console.log(error);
     res.status(500).json({
       success: false,
-      message: "Unknown error occured, please try again.",
+      message: "Unknown error occurred, please try again.",
     });
   }
 }
 
 /**
- * Supprime le token et deconnecte l'utilisateur
+ * Supprime le token et déconnecte l'utilisateur
  */
 export function logout(req: Request, res: Response): any{
   res.clearCookie("authToken", {httpOnly: true})
@@ -91,7 +91,7 @@ export function logout(req: Request, res: Response): any{
 }
 
 /**
- * Verifie si le JWT est valide
+ * Vérifie si le JWT est valide
  */
 export function verifyToken(req: Request, res: Response): any{
   const token = req.body?.token?.value;
