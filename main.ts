@@ -13,13 +13,14 @@ app.use(cookieParser())
 
 //Importation des controllers
 import { insertUser, loginUser, logout, verifyToken } from "./controllers/UsersController";
+import { addDream } from "./controllers/DreamController";
 
 //** Routes public
 app.post("/newUser", insertUser);
 app.post("/loginUser", loginUser);
 app.post("/logout", logout)
 app.post("/verifyToken", verifyToken);
-
+app.post("/addDream", addDream)
 
 //** Routes privés
 
