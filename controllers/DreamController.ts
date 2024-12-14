@@ -16,7 +16,7 @@ export async function addDream(req: Request, res: Response): Promise<any> {
         ])
 
         console.log("Dream inserted");
-        return res.send("test")
+        return res.json({success: true, message: "Dream inserted with success."})
 
     } catch (error: any) {
         res.send("Erreur : ")
