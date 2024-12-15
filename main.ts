@@ -13,7 +13,7 @@ app.use(cookieParser())
 
 //Importation des controllers
 import { insertUser, loginUser, logout, verifyToken } from "./controllers/UsersController";
-import { addDream } from "./controllers/DreamController";
+import { addDream, getDream } from "./controllers/DreamController";
 import { authChecker } from "./middlewares/authChecker";
 
 //** Routes public
@@ -21,9 +21,10 @@ app.post("/newUser", insertUser);
 app.post("/loginUser", loginUser);
 app.post("/logout", logout)
 app.post("/verifyToken", verifyToken);
-app.post("/addDream", authChecker, addDream)
 
 //** Routes privés
+app.post("/addDream", authChecker, addDream)
+app.get("/getDream", authChecker, getDream)
 
 // Lancement de l'application sur le port 8000
 app.listen("8000", () => {
