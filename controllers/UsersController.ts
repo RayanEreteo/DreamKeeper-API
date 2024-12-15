@@ -1,6 +1,6 @@
 import { connect } from "../modules/dbConn";
 import { encrypt, checkHash } from "../modules/bcryptUtils";
-import { areInputsValid } from "../modules/inputsValidator";
+import { areLoginInputsValid } from "../modules/inputsValidator";
 import { doesUserExist } from "../modules/CRUDFunction";
 import { Request, Response } from "express";
 import { sign, verify } from "jsonwebtoken";
@@ -11,7 +11,7 @@ import { sign, verify } from "jsonwebtoken";
 export async function insertUser(req: Request, res: Response): Promise<any> {
   const { email, password, dreamMemory } = req.body;
 
-  const inputsValidResponseObject = areInputsValid(email, password, dreamMemory);
+  const inputsValidResponseObject = areLoginInputsValid(email, password, dreamMemory);
   if (inputsValidResponseObject.success === false) {
     return res.status(400).json(inputsValidResponseObject); // 400 for bad request (validation failed)
   }
@@ -48,7 +48,7 @@ export async function insertUser(req: Request, res: Response): Promise<any> {
 export async function loginUser(req: Request, res: Response): Promise<any> {
   const { email, password} = req.body;
 
-  const inputsValidResponseObject = areInputsValid(email, password, "")
+  const inputsValidResponseObject = areLoginInputsValid(email, password, "")
   if (inputsValidResponseObject.success == false) return res.status(400).json(inputsValidResponseObject)
   
   try {
