@@ -25,8 +25,28 @@ export async function addDream(req: Request, res: Response): Promise<any> {
         return res.json({success: true, message: "Dream inserted with success."})
 
     } catch (error: any) {
-        res.send("Erreur : ")
-        console.log(error);
-        
+        return res.status(500).json({
+            success: false,
+            message: "An unknown error occurred, please try again.",
+          });
+    }
+}
+
+export async function getDream(req: Request, res: Response): Promise<any> {
+    const email = req.body.payload.email
+
+    try {
+        const conn = await connect()
+
+        const result = await conn.execute("SELECT * FROM dream WHERE author = ?", [
+            email
+        ])
+
+       return res.json({success: true, data: result})
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "An unknown error occurred, please try again.",
+          });
     }
 }
