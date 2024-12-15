@@ -19,3 +19,20 @@ export function areLoginInputsValid(email: string, password: string, dreamMemory
 
   return {success: true}
 }
+
+
+/**
+ * Vérifie si les inputs de formulaire du journal des rêves sont correctes.
+ * 
+ * @param dreamName
+ * @param dreamContent
+ * @param isLucid
+ */
+export function areDreamInputsValid(dreamName: string, dreamContent: string, isLucid: boolean): ValidationResult{
+
+  if(dreamName == "" || dreamContent == "" || dreamName == null || dreamContent == null) return {success: false, message: "Please fill all the fields."}
+  if(dreamName.length < 5 || dreamName.length > 30 || dreamContent.length < 5 || dreamContent.length > 500) return {success: false, message: "Please respect the inputs length."}
+  if(typeof(isLucid) != "boolean") return {success: false, message: "Invalid checkbox value."}
+
+  return {success: true}
+}
