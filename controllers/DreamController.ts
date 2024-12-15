@@ -38,11 +38,11 @@ export async function getDream(req: Request, res: Response): Promise<any> {
     try {
         const conn = await connect()
 
-        const result = await conn.execute("SELECT * FROM dream WHERE author = ?", [
+        const [data] = await conn.execute("SELECT * FROM dream WHERE author = ?", [
             email
         ])
 
-       return res.json({success: true, data: result})
+       return res.json({success: true, data: data})
     } catch (error) {
         return res.status(500).json({
             success: false,
